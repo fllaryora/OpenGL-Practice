@@ -2,23 +2,38 @@ package com.intecanar.openglpractice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.intecanar.openglpractice.ui.main.MainFragment
+import android.view.WindowManager
+import com.intecanar.openglpractice.opengL.surface.OpenGLView
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var gLView: OpenGLView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
-                .commitNow()
-        }
+
+        //quit status bar
+        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+
+        gLView = OpenGLView(this)
+        setContentView(gLView)
+
     }
 
 
     override fun onPointerCaptureChanged(hasCapture: Boolean) {
         //super.onPointerCaptureChanged(hasCapture)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        this.gLView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        this.gLView.onPause()
     }
 
 }

@@ -1,9 +1,9 @@
 package com.intecanar.openglpractice.opengL.shape
 
-import android.content.res.Resources
+
 import android.opengl.GLES20
-import android.util.DisplayMetrics
 import com.intecanar.openglpractice.opengL.renderer.OpenGLRenderer
+import com.intecanar.openglpractice.opengL.surface.OpenGLView
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -46,7 +46,7 @@ class Circle constructor(  cx : Float,  cy : Float,
     // calculate the segments
     fun calculatePoints( cx : Float, cy : Float,
                             radius : Float, segments : Int) {
-        val dm : DisplayMetrics =  Resources.getSystem().displayMetrics
+
         val coordinateSize = segments * COORDS_PER_VERTEX
         val coordinates = FloatArray(coordinateSize)
 
@@ -55,8 +55,8 @@ class Circle constructor(  cx : Float,  cy : Float,
             val percent : Float = (coordinateIndex.toFloat() / (segments.toFloat() - 1f))
             val percentInRadians : Float = 2f * percent * Math.PI.toFloat()
 
-            val aspectRatio = dm.widthPixels.toFloat()/dm.heightPixels.toFloat()
-
+            //val aspectRatio =
+            val aspectRatio = OpenGLView.aspectRatio
             //Vertex position
             val xi = cx + radius * cos(percentInRadians)
             val yi = cy + radius * sin(percentInRadians) * aspectRatio
@@ -102,7 +102,7 @@ class Circle constructor(  cx : Float,  cy : Float,
         // Disable vertex array
         GLES20.glDisableVertexAttribArray(mPositionHandle)
         // Set color of the shape (circle)
-        GLES20.glUniform4fv(mColorHandle, 1, floatArrayOf(0.5f, 0.3f, 0.1f, 1f), 0)
+        GLES20.glUniform4fv(mColorHandle, 1, floatArrayOf(0.5f, 0.5f, 0.5f, 1f), 0)
 
     }
 
