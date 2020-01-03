@@ -9,6 +9,7 @@ import android.util.Log
 import com.intecanar.openglpractice.opengL.renderer.OpenGLRenderer
 
 class OpenGLView: GLSurfaceView {
+    var renderer : OpenGLRenderer? = null
 
     constructor(context: Context) : super(context) {
         init ()
@@ -21,13 +22,10 @@ class OpenGLView: GLSurfaceView {
     fun init (){
         setEGLContextClientVersion(3)
         preserveEGLContextOnPause = true
-        setRenderer(OpenGLRenderer())
+        renderer = OpenGLRenderer()
+        setRenderer(renderer!!)
     }
 
-    override fun onResume() {
-        Log.d("OpenGLView", "OpenGLView width ${this.layoutParams.width}, height ${this.layoutParams.height}")
-        super.onResume()
-    }
     companion object {
         val dm : DisplayMetrics =  Resources.getSystem().displayMetrics
         var width : Float =  dm.widthPixels.toFloat()

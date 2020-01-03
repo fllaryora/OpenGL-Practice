@@ -6,13 +6,13 @@ import com.intecanar.openglpractice.opengL.shape.Circle
 import com.intecanar.openglpractice.opengL.surface.OpenGLView
 import javax.microedition.khronos.opengles.GL10
 
-class OpenGLRenderer() : GLSurfaceView.Renderer {
+class OpenGLRenderer : GLSurfaceView.Renderer {
 
     private lateinit var  circle: Circle
 
-    private  var objectsReady = false
+    var objectsReady = false
 
-   // fun getCircle():Circle = circle
+   fun getCircle():Circle = circle
 
 
     override fun onDrawFrame(gl: GL10?) {
