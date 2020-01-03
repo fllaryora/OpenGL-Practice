@@ -16,4 +16,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    override fun onPointerCaptureChanged(hasCapture: Boolean) {
+        //super.onPointerCaptureChanged(hasCapture)
+    }
+
 }
