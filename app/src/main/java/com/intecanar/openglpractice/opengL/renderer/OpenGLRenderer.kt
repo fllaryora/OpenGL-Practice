@@ -1,12 +1,15 @@
 package com.intecanar.openglpractice.opengL.renderer
 
+import android.content.Context
+
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
+
 import com.intecanar.openglpractice.opengL.shape.Circle
 import com.intecanar.openglpractice.opengL.surface.OpenGLView
 import javax.microedition.khronos.opengles.GL10
 
-class OpenGLRenderer : GLSurfaceView.Renderer {
+class OpenGLRenderer constructor(private val context: Context) : GLSurfaceView.Renderer {
 
     private lateinit var  circle: Circle
 
@@ -22,30 +25,25 @@ class OpenGLRenderer : GLSurfaceView.Renderer {
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
+        GLES20.glViewport(0, 0, width, height)
         OpenGLView.aspectRatio = width.toFloat()/ height.toFloat()
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: javax.microedition.khronos.egl.EGLConfig?) {
         // Set the background frame color
-        GLES20.glClearColor(0.0f, 0.0f, 0.0f, 1.0f)
-        circle = Circle(0f,0f, 0.2f, 75)
+        GLES20.glClearColor(0.2f, 0.3f, 0.4f, 1.0f)
+
+        // Create the GLText
+       // glText =  GLText(context.assets)
+
+        // Load the font from file (set size + padding), creates the texture
+        // NOTE: after a successful call to this the font is ready for rendering!
+       // glText.load( "Roboto-Regular.ttf", 14, 2, 2 );  // Create Font (Height: 14 Pixels / X+Y Padding 2 Pixels)
+
+        circle = Circle(Pair(0f,0f), 0.10f, 360,  floatArrayOf(0.5f, 0.5f, 0.5f, 1f))
         objectsReady = true
     }
 
-    companion object {
-
-        fun loadShader(type: Int, shaderCode: String): Int {
-
-            // create a vertex shader type (GLES20.GL_VERTEX_SHADER)
-            // or a fragment shader type (GLES20.GL_FRAGMENT_SHADER)
-            return GLES20.glCreateShader(type).also { shader ->
-
-                // add the source code to the shader and compile it
-                GLES20.glShaderSource(shader, shaderCode)
-                GLES20.glCompileShader(shader)
-            }
-        }
-    }
 
 
 }

@@ -10,7 +10,7 @@ import com.intecanar.openglpractice.opengL.renderer.OpenGLRenderer
 
 class OpenGLView: GLSurfaceView {
     var renderer : OpenGLRenderer? = null
-
+    var isRenderSet = false
     constructor(context: Context) : super(context) {
         init ()
     }
@@ -19,11 +19,12 @@ class OpenGLView: GLSurfaceView {
         init ()
     }
 
-    fun init (){
-        setEGLContextClientVersion(3)
+    private fun init (){
+        setEGLContextClientVersion(2)
         preserveEGLContextOnPause = true
-        renderer = OpenGLRenderer()
+        renderer = OpenGLRenderer(context)
         setRenderer(renderer!!)
+        isRenderSet = true
     }
 
     companion object {
