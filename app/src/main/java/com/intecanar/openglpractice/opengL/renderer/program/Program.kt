@@ -12,10 +12,8 @@ abstract class Program {
     }
     var handle: Int = 0
         private set
-    private var vertexShaderHandle: Int =
-        INVALID_SHADER
-    private var fragmentShaderHandle: Int =
-        INVALID_SHADER
+    private var vertexShaderHandle: Int = INVALID_SHADER
+    private var fragmentShaderHandle: Int = INVALID_SHADER
     private var mInitialized: Boolean = false
 
     init {

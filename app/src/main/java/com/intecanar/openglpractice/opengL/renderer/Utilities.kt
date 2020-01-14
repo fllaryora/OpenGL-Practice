@@ -71,7 +71,8 @@ object Utilities {
         }
 
         if (shaderHandle == INVALID_SHADER) {
-            throw RuntimeException("Error creating shader $type")
+            val error = GLES20.glGetError()
+            throw RuntimeException("Error creating shader Error $error")
         }
         return shaderHandle
     }

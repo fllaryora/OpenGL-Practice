@@ -7,9 +7,11 @@ import android.opengl.GLSurfaceView
 import android.util.AttributeSet
 import android.util.Log
 import com.intecanar.openglpractice.opengL.renderer.OpenGLRenderer
+import com.intecanar.openglpractice.opengL.text.Texample2Renderer
 
 class OpenGLView: GLSurfaceView {
-    var renderer : OpenGLRenderer? = null
+    //var renderer : OpenGLRenderer? = null
+    var rendererText : Texample2Renderer? = null
     var isRenderSet = false
     constructor(context: Context) : super(context) {
         init ()
@@ -22,16 +24,18 @@ class OpenGLView: GLSurfaceView {
     private fun init (){
         setEGLContextClientVersion(2)
         preserveEGLContextOnPause = true
-        renderer = OpenGLRenderer(context)
-        setRenderer(renderer!!)
+        //renderer = OpenGLRenderer(context)
+        rendererText = Texample2Renderer(context)
+        //setRenderer(renderer!!)
+        setRenderer(rendererText!!)
         isRenderSet = true
     }
 
     companion object {
         val dm : DisplayMetrics =  Resources.getSystem().displayMetrics
-        var width : Float =  dm.widthPixels.toFloat()
-        var height : Float = dm.heightPixels.toFloat()
-        var aspectRatio : Float = width / height
+        var width : Int =  dm.widthPixels
+        var height : Int = dm.heightPixels
+        var aspectRatio : Float = width.toFloat() / height.toFloat()
     }
 }
 
